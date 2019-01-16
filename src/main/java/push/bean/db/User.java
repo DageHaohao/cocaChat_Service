@@ -6,6 +6,7 @@ import javax.persistence.*;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
@@ -20,7 +21,9 @@ import java.util.Set;
 
 @Entity
 @Table(name = "TB_USER")
-public class User {
+public class User implements Principal {
+
+    //过滤器中使用到 使User实体类实现Principal接口
 
     // 这是一个主键
     @Id
