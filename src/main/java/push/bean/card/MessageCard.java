@@ -13,7 +13,6 @@ import java.time.LocalDateTime;
  * @date 2019/1/2815:21
  */
 public class MessageCard {
-
     @Expose
     private String id; // Id
     @Expose
@@ -105,5 +104,5 @@ public class MessageCard {
     public void setReceiverId(String receiverId) {
         this.receiverId = receiverId;
     }
-
 }
+

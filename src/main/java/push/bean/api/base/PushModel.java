@@ -22,7 +22,6 @@ import java.util.List;
 
 @SuppressWarnings("WeakerAccess")
 public class PushModel {
-
     public static final int ENTITY_TYPE_LOGOUT = -1;
     public static final int ENTITY_TYPE_MESSAGE = 200;
     public static final int ENTITY_TYPE_ADD_FRIEND = 1001;
@@ -42,6 +41,7 @@ public class PushModel {
         return add(new Entity(type, content));
     }
 
+    // 拿到一个推送的字符串
     public String getPushString() {
         if (entities.size() == 0)
             return null;
@@ -54,7 +54,6 @@ public class PushModel {
      * content：用户信息的Json字符串
      * type=ENTITY_TYPE_ADD_FRIEND
      */
-
     public static class Entity {
         public Entity(int type, String content) {
             this.type = type;
@@ -71,5 +70,4 @@ public class PushModel {
         @Expose
         public LocalDateTime createAt = LocalDateTime.now();
     }
-
 }

@@ -1,17 +1,16 @@
 package push.service;
 
 import com.google.common.base.Strings;
-import push.bean.api.base.PushModel;
 import push.bean.api.base.ResponseModel;
 import push.bean.api.user.UpdateInfoModel;
 import push.bean.card.UserCard;
 import push.bean.db.User;
 import push.factory.UserFactory;
-import push.utils.PushDispatcher;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
+import java.util.Scanner;
 import java.util.stream.Collectors;
 
 /**
