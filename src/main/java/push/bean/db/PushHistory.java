@@ -19,7 +19,6 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "TB_PUSH_HISTORY")
 public class PushHistory {
-
     @Id
     @PrimaryKeyJoinColumn
     @GeneratedValue(generator = "uuid")
@@ -169,6 +168,4 @@ public class PushHistory {
     public void setArrivalAt(LocalDateTime arrivalAt) {
         this.arrivalAt = arrivalAt;
     }
-
-
 }

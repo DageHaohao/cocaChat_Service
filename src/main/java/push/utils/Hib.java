@@ -15,7 +15,6 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
  * @date 2019/1/1521:47
  */
 public class Hib {
-
     // 全局SessionFactory
     private static SessionFactory sessionFactory;
 
@@ -138,5 +137,6 @@ public class Hib {
 
         return t;
     }
+
 
 }

@@ -2,6 +2,7 @@ package push.factory;
 
 import com.google.common.base.Strings;
 import push.bean.api.base.PushModel;
+import push.bean.card.GroupMemberCard;
 import push.bean.card.MessageCard;
 import push.bean.db.*;
 import push.utils.Hib;
@@ -21,11 +22,9 @@ import java.util.stream.Collectors;
  * @date 2019/1/3114:54
  */
 public class PushFactory {
-
     // 发送一条消息，并在当前的发送历史记录中存储记录
     public static void pushNewMessage(User sender, Message message) {
-
-        if(sender==null||message==null)
+        if (sender == null || message == null)
             return;
 
         // 消息卡片用于发送
@@ -36,10 +35,10 @@ public class PushFactory {
         // 发送者
         PushDispatcher dispatcher = new PushDispatcher();
 
-        if (message.getGroup()==null
-                && Strings.isNullOrEmpty(message.getGroupId())){
-
+        if (message.getGroup() == null
+                && Strings.isNullOrEmpty(message.getGroupId())) {
             // 给朋友发送消息
+
             User receiver = UserFactory.findById(message.getReceiverId());
             if (receiver == null)
                 return;
@@ -64,8 +63,7 @@ public class PushFactory {
 
             // 保存到数据库
             Hib.queryOnly(session -> session.save(history));
-
-        }else {
+        } else {
 
             Group group = message.getGroup();
             // 因为延迟加载情况可能为null，需要通过Id查询
@@ -104,11 +102,12 @@ public class PushFactory {
                     session.saveOrUpdate(history);
                 }
             });
-
         }
+
 
         // 发送者进行真实的提交
         dispatcher.submit();
+
     }
 
     /**
@@ -142,4 +141,11 @@ public class PushFactory {
             dispatcher.add(receiver, pushModel);
         }
     }
+
+    public static void pushJoinGroup(Set<GroupMember> members) {
+    }
+
+    public static void pushGroupMemberAdd(Set<GroupMember> oldMembers, List<GroupMemberCard> insertCards) {
+    }
 }
+

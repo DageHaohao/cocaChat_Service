@@ -27,8 +27,7 @@ import javax.ws.rs.core.MediaType;
  */
 
 @Path("/msg")
-public class MessageService extends BaseService{
-
+public class MessageService extends BaseService {
     // 发送一条消息到服务器
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
@@ -62,20 +61,21 @@ public class MessageService extends BaseService{
             return ResponseModel.buildNotFoundUserError("Con't find receiver user");
         }
 
+        System.out.println(receiver.getId()+""+sender.getId());
+
         if (receiver.getId().equalsIgnoreCase(sender.getId())) {
             // 发送者接收者是同一个人就返回创建消息失败
             return ResponseModel.buildCreateError(ResponseModel.ERROR_CREATE_MESSAGE);
         }
 
         // 存储数据库
-        Message message = MessageFactory.add(sender,receiver,model);
+        Message message = MessageFactory.add(sender, receiver, model);
 
         return buildAndPushResponse(sender, message);
     }
 
-    //发送到群
+    // 发送到群
     private ResponseModel<MessageCard> pushToGroup(User sender, MessageCreateModel model) {
-
         // 找群是有权限性质的找
         Group group = GroupFactory.findById(sender, model.getReceiverId());
         if (group == null) {
@@ -88,14 +88,13 @@ public class MessageService extends BaseService{
 
         // 走通用的推送逻辑
         return buildAndPushResponse(sender, message);
-
     }
 
     // 推送并构建一个返回信息
     private ResponseModel<MessageCard> buildAndPushResponse(User sender, Message message) {
         if (message == null) {
             // 存储数据库失败
-            return ResponseModel.buildCreateError(ResponseModel.ERROR_CREATE_USER);
+            return ResponseModel.buildCreateError(ResponseModel.ERROR_UNKNOWN);
         }
 
         // 进行推送
@@ -104,6 +103,4 @@ public class MessageService extends BaseService{
         // 返回
         return ResponseModel.buildOk(new MessageCard(message));
     }
-
-
 }

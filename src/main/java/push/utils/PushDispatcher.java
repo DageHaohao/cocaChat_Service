@@ -109,7 +109,6 @@ public class PushDispatcher {
                 haveData = true;
             } catch (Exception e) {
                 e.printStackTrace();
-
             }
         }
 

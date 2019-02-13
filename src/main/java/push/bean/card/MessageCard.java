@@ -105,4 +105,3 @@ public class MessageCard {
         this.receiverId = receiverId;
     }
 }
-

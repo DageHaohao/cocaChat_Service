@@ -19,7 +19,6 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "TB_MESSAGE")
 public class Message {
-
     // 发送给人的
     public static final int RECEIVER_TYPE_NONE = 1;
     // 发送给群的
@@ -94,6 +93,7 @@ public class Message {
     @Column(updatable = false, insertable = false)
     private String groupId;
 
+
     public Message() {
 
     }
@@ -119,6 +119,7 @@ public class Message {
         this.sender = sender;
         this.group = group;
     }
+
 
     public String getId() {
         return id;
@@ -215,5 +216,4 @@ public class Message {
     public void setGroupId(String groupId) {
         this.groupId = groupId;
     }
-
 }

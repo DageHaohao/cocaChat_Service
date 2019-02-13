@@ -23,8 +23,6 @@ import java.util.Set;
 @Table(name = "TB_USER")
 public class User implements Principal {
 
-    //过滤器中使用到 使User实体类实现Principal接口
-
     // 这是一个主键
     @Id
     @PrimaryKeyJoinColumn
@@ -231,5 +229,4 @@ public class User implements Principal {
     public void setGroups(Set<Group> groups) {
         this.groups = groups;
     }
-
 }
