@@ -1,18 +1,16 @@
 package push.service;
 
 import com.google.common.base.Strings;
-import push.bean.api.base.PushModel;
 import push.bean.api.base.ResponseModel;
 import push.bean.api.user.UpdateInfoModel;
 import push.bean.card.UserCard;
 import push.bean.db.User;
+import push.factory.PushFactory;
 import push.factory.UserFactory;
-import push.utils.PushDispatcher;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
-import java.util.Scanner;
 import java.util.stream.Collectors;
 
 /**
@@ -102,7 +100,9 @@ public class UserService extends BaseService {
             return ResponseModel.buildServiceError();
         }
 
-        // TODO 通知我关注的人我关注他
+        // 通知我关注的人我关注他
+        //给他发送一个我的信息过去
+        PushFactory.pushFollow(followUser,new UserCard(self));
 
         // 返回关注的人的信息
 

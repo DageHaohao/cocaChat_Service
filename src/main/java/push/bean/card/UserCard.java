@@ -2,6 +2,7 @@ package push.bean.card;
 
 import com.google.gson.annotations.Expose;
 import push.bean.db.User;
+import push.utils.Hib;
 
 import java.time.LocalDateTime;
 
@@ -59,10 +60,19 @@ public class UserCard {
         this.sex = user.getSex();
         this.modifyAt = user.getUpdateAt();
 
-        // TODO 得到关注人和粉丝的数量
+        //得到关注人和粉丝的数量
         // user.getFollowers().size()
         // 懒加载会报错，因为没有Session
-
+        //重新加载一次即可解决问题
+        Hib.queryOnly(session -> {
+            // 重新加载一次用户信息
+            session.load(user, user.getId());
+            // 这个时候仅仅只是进行了数量查询，并没有查询整个集合
+            // 要查询集合，必须在session存在情况下进行遍历
+            // 或者使用Hibernate.initialize(user.getFollowers());
+            follows = user.getFollowers().size();
+            following = user.getFollowing().size();
+        });
     }
 
 
